@@ -24,6 +24,7 @@ class ConfigView : View() {
 
     private fun initConfig(){
         config.double("Foo") ?: config.set("Foo" to 2)
+        config.jsonArray("People") ?: config.set("People" to listOf("Frodo", "Sam"))
         config.save()
     }
 
@@ -36,7 +37,7 @@ class ConfigView : View() {
             action {
                 val dir = chooseFile(
                         "Select Properties",
-                        arrayOf(FileChooser.ExtensionFilter("Properties", "*.properties")))
+                        arrayOf(FileChooser.ExtensionFilter("Properties", "*.config")))
                 settingsFile.set(dir.firstOrNull()?.toPath())
             }
         }
