@@ -10,6 +10,7 @@ import javafx.scene.control.ToggleGroup
 import javafx.util.Duration
 import org.controlsfx.control.SegmentedButton
 import tornadofx.*
+import java.io.File
 
 class MobControlView: View() {
 
@@ -27,6 +28,8 @@ class MobControlView: View() {
 
         val start = ToggleButton("Start").apply {
             action {
+                GitAdapter(File(".")).git("status")
+
                 if (timeline != null) {
                     timeline?.stop()
                     timeline = null
