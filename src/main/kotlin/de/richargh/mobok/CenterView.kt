@@ -33,6 +33,7 @@ class CenterView: CoroutineScope, View() {
     }
 
     override val root = vbox {
+        add(find(MobControlView::class.java))
         add(find(MemberView::class.java))
     }
 }
