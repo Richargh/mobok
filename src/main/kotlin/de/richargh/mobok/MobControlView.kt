@@ -1,15 +1,23 @@
 package de.richargh.mobok
 
-import javafx.beans.property.SimpleDoubleProperty
+import javafx.animation.KeyFrame
+import javafx.animation.Timeline
+import javafx.beans.property.SimpleIntegerProperty
+import javafx.event.EventHandler
 import javafx.geometry.Pos
 import javafx.scene.control.ToggleButton
 import javafx.scene.control.ToggleGroup
+import javafx.util.Duration
 import org.controlsfx.control.SegmentedButton
 import tornadofx.*
 
-class MobControlView: View(){
+class MobControlView: View() {
 
-    private val completion = SimpleDoubleProperty(0.5)
+    private var timeline: Timeline? = null
+
+    private val maxSeconds = 15
+    private val memberSeconds = SimpleIntegerProperty(0)
+    private val memberProgress = memberSeconds.doubleBinding { (it?.toDouble() ?: 0.0) / maxSeconds }
 
     override val root = vbox {
 
@@ -17,7 +25,28 @@ class MobControlView: View(){
 
         val reset = ToggleButton("Reset")
 
-        val start = ToggleButton("Start")
+        val start = ToggleButton("Start").apply {
+            action {
+                if (timeline != null) {
+                    timeline?.stop()
+                    timeline = null
+                    return@action
+                }
+                timeline = Timeline().apply {
+                    cycleCount = Timeline.INDEFINITE
+                    keyFrames.add(
+                            KeyFrame(Duration.seconds(1.0), EventHandler {
+                                memberSeconds.set(memberSeconds.get() + 1)
+                                if (memberSeconds.get() >= maxSeconds) {
+                                    stop()
+                                    memberSeconds.set(0)
+                                    println("Member done")
+                                }
+                            }))
+                    playFromStart()
+                }
+            }
+        }
         val next = ToggleButton("Next").apply { tooltip("bar\nlalala") }
         val done = ToggleButton("Done").apply { tooltip("foo") }
 
@@ -33,6 +62,6 @@ class MobControlView: View(){
             add(commit)
         }
 
-        progressbar(completion) { useMaxWidth = true }
+        progressbar(memberProgress) { useMaxWidth = true }
     }
 }
