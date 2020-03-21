@@ -14,6 +14,10 @@ Inspired by the CLI Tool link:https://github.com/remotemobprogramming/mob[Mob]
 * link:https://openjfx.io/[OpenJFX] 14
 * Gradle Kotlin DSL
 
+== Attribution
+
+* Ok Sign by link:https://www.iconfinder.com/icons/3099350/2_gesturing_ok_woman_icon[Webalys] under link:https://creativecommons.org/licenses/by/3.0/[Attribution 3.0 Unported (CC BY 3.0)]
+
 == Usage
 
 * Build `./gradlew build`
