@@ -1,14 +1,15 @@
 package de.richargh.mobok
 
+import javafx.beans.property.SimpleDoubleProperty
 import javafx.geometry.Pos
 import javafx.scene.control.ToggleButton
 import javafx.scene.control.ToggleGroup
 import org.controlsfx.control.SegmentedButton
-import tornadofx.View
-import tornadofx.hbox
-import tornadofx.vbox
+import tornadofx.*
 
 class MobControlView: View(){
+
+    private val completion = SimpleDoubleProperty(0.5)
 
     override val root = vbox {
 
@@ -17,8 +18,8 @@ class MobControlView: View(){
         val reset = ToggleButton("Reset")
 
         val start = ToggleButton("Start")
-        val next = ToggleButton("Next")
-        val done = ToggleButton("Done")
+        val next = ToggleButton("Next").apply { tooltip("bar\nlalala") }
+        val done = ToggleButton("Done").apply { tooltip("foo") }
 
         val commit = ToggleButton("Commit")
 
@@ -31,5 +32,7 @@ class MobControlView: View(){
             add(mobcontrols)
             add(commit)
         }
+
+        progressbar(completion) { useMaxWidth = true }
     }
 }
