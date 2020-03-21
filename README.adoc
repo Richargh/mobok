@@ -5,6 +5,7 @@ Inspired by the CLI Tool link:https://github.com/remotemobprogramming/mob[Mob]
 *Features*
 
 * Pair/Mob Branching
+* Notifications, on MacOS you have to allow them in the system preferences
 
 *Tech*
 

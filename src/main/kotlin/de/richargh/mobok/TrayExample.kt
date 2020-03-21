@@ -3,8 +3,10 @@ package de.richargh.mobok
 import javafx.application.Application
 import javafx.application.Platform
 import javafx.event.EventHandler
+import javafx.scene.layout.HBox
 import javafx.stage.Stage
 import javafx.stage.StageStyle
+import org.controlsfx.control.Notifications
 import org.reactfx.EventSource
 import tornadofx.*
 import tornadofx.Component
@@ -57,6 +59,15 @@ class TrayExample: App() {
         stage.hide()
     }
 
+    private fun onNotification(trayIcon: TrayIcon) {
+        trayIcon.displayMessage("Closing now", "For real", TrayIcon.MessageType.INFO)
+        Notifications.create()
+                .owner(stage)
+                .title("Title Text")
+                .text("Hello World 0!")
+                .showWarning()
+    }
+
     // a timer allowing the tray icon to provide a periodic notification event.
     private val notificationTimer = Timer()
 
@@ -92,6 +103,8 @@ class TrayExample: App() {
             val openItem = MenuItem("hello, world")
             openItem.addActionListener { event: ActionEvent? ->
                 println("openItem was clicked")
+
+                Platform.runLater { onNotification(trayIcon) }
                 Platform.runLater(this::onShow)
             }
 

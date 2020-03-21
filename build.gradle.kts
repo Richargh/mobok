@@ -21,6 +21,7 @@ dependencies {
     /** Main dependencies **/
     implementation("no.tornado:tornadofx:1.7.20")
     implementation("org.reactfx:reactfx:1.4.1")
+    implementation("org.controlsfx:controlsfx:11.0.1")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-javafx:1.3.5")
