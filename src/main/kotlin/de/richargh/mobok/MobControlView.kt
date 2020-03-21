@@ -10,22 +10,26 @@ import tornadofx.vbox
 
 class MobControlView: View(){
 
-
-
     override val root = vbox {
 
         val startEndGroup = ToggleGroup()
 
+        val reset = ToggleButton("Reset")
+
         val start = ToggleButton("Start")
         val next = ToggleButton("Next")
         val done = ToggleButton("Done")
-        val reset = ToggleButton("Reset")
 
-        startEndGroup.toggles.addAll(start, next, done, reset)
+        val commit = ToggleButton("Commit")
+
+        startEndGroup.toggles.addAll(reset, start, next, done, commit)
 
         val mobcontrols = SegmentedButton(start, next, done)
-        val cancel = SegmentedButton(reset)
 
-        hbox(spacing = 5, alignment = Pos.CENTER) { add(mobcontrols); add(cancel) }
+        hbox(spacing = 5, alignment = Pos.CENTER) {
+            add(reset)
+            add(mobcontrols)
+            add(commit)
+        }
     }
 }
