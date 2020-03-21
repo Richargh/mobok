@@ -21,5 +21,14 @@ class MemberView: View() {
                 vGrow = Priority.ALWAYS
             }
         }
+
+        hbox {
+            textfield()
+            button("Add Member") {
+                action {
+
+                }
+            }
+        }
     }
 }
