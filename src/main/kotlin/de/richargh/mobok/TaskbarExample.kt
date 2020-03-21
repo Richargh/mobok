@@ -46,7 +46,8 @@ class TaskbarExample {
         @Throws(IOException::class, InterruptedException::class)
         private fun setImage(taskbar: Taskbar) {
             if (taskbar.isSupported(Taskbar.Feature.ICON_IMAGE)) {
-                val imageInputStream: InputStream = TaskbarExample::class.java.getResourceAsStream("woman-gesturing-OK[iconfinder].png")
+                val imageInputStream: InputStream =
+                        TaskbarExample::class.java.getResourceAsStream("woman-gesturing-OK[iconfinder].png")
                 val image: Image = ImageIO.read(imageInputStream)
                 taskbar.iconImage = image
                 Thread.sleep(2500)

@@ -1,9 +1,11 @@
 package de.richargh.mobok
 
-import tornadofx.*
+import tornadofx.View
+import tornadofx.vbox
 
-class Header : View() {
+class HeaderView : View() {
 
     override val root = vbox {
+        add(find<ConfigView>())
     }
 }

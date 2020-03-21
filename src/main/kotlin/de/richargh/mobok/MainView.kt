@@ -6,8 +6,8 @@ import tornadofx.borderpane
 class MainView: View() {
 
     override val root = borderpane {
-        top<Header>()
-        left<CustomerForm>()
+        top<HeaderView>()
         center<CenterView>()
+        bottom<FooterView>()
     }
 }
