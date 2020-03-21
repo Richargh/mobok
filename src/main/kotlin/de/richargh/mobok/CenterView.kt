@@ -1,13 +1,18 @@
 package de.richargh.mobok
 
+import javafx.beans.property.SimpleStringProperty
+import javafx.geometry.Pos
+import javafx.scene.control.TableView
 import javafx.scene.control.TextField
+import javafx.scene.control.ToggleButton
+import javafx.scene.control.ToggleGroup
+import javafx.scene.layout.Priority
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import tornadofx.View
-import tornadofx.singleAssign
-import tornadofx.vbox
+import org.controlsfx.control.SegmentedButton
+import tornadofx.*
 
 class CenterView: CoroutineScope, View() {
 
@@ -28,6 +33,6 @@ class CenterView: CoroutineScope, View() {
     }
 
     override val root = vbox {
-
+        add(find(MemberView::class.java))
     }
 }

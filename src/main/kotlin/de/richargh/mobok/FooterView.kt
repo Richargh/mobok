@@ -5,6 +5,5 @@ import tornadofx.*
 class FooterView: View() {
 
     override val root = hbox {
-        button("")
     }
 }

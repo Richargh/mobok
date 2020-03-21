@@ -7,8 +7,10 @@ import tornadofx.*
 import java.nio.file.Path
 import java.nio.file.Paths
 
-class ConfigView : View() {
+class ConfigView: View() {
     override var configPath = Paths.get(".", "no.config")
+
+    private val events: Events by inject()
 
     private val settingsFile = SimpleObjectProperty<Path>().apply {
         onChange(::changeConfigPath)
@@ -18,14 +20,15 @@ class ConfigView : View() {
     private fun changeConfigPath(newPath: Path?) {
         println("Changing config from [$configPath] to [$newPath]")
         configPath = newPath
-        if(newPath != null)
+        if (newPath != null)
             initConfig()
     }
 
     private fun initConfig(){
         config.double("Foo") ?: config.set("Foo" to 2)
-        config.jsonArray("People") ?: config.set("People" to listOf("Frodo", "Sam"))
         config.save()
+
+        //        events.configChanged.push()
     }
 
     private val settings = settingsFile.stringBinding { it?.normalize()?.toAbsolutePath()?.toString() ?: "" }
