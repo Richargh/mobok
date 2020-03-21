@@ -1,0 +1,20 @@
+= MobOk
+
+Inspired by the CLI Tool link:https://github.com/remotemobprogramming/mob[Mob]
+
+*Features*
+
+* Pair/Mob Branching
+
+*Tech*
+
+* Builds with Java 11
+* Kotlin Coroutines
+* TornadoFx (see link:https://github.com/edvin/tornadofx-guide[TornadoFx Guide])
+* link:https://openjfx.io/[OpenJFX] 14
+* Gradle Kotlin DSL
+
+== Usage
+
+* Build `./gradlew build`
+
