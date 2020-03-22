@@ -36,11 +36,12 @@ class FileSystemGit(private val baseFolder: File = File("."), private val upstre
     }
 
     override fun switchToBranch(name: String){
+        // alternative is git switch
         git("checkout", name)
     }
 
     override fun createBranch(name: String) {
-        git("checkout", name)
+        git("branch", name)
     }
 
     override fun delteBranch(name: String) {
