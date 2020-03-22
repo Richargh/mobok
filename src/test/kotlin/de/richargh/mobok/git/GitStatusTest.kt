@@ -4,13 +4,38 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class GitStatusTest {
+
     @Test
     fun `should find master branch when on master`() {
         // GIVEN
 
         // WHEN
         val result = GitStatus.ofCli(
+                listOf("## master...origin/master"))
+
+        // THEN
+        assertThat(result.branch).isEqualTo("master")
+    }
+
+    @Test
+    fun `should find master branch when ahead on master`() {
+        // GIVEN
+
+        // WHEN
+        val result = GitStatus.ofCli(
                 listOf("## master...origin/master [ahead 3]"))
+
+        // THEN
+        assertThat(result.branch).isEqualTo("master")
+    }
+
+    @Test
+    fun `should find master branch when ahead and behind on master`() {
+        // GIVEN
+
+        // WHEN
+        val result = GitStatus.ofCli(
+                listOf("## master...origin/master [ahead 1, behind 5]"))
 
         // THEN
         assertThat(result.branch).isEqualTo("master")
