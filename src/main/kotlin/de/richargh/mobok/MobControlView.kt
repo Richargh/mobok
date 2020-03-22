@@ -18,8 +18,15 @@ class MobControlView: View() {
 
         val start = ToggleButton("Start")
         start.action { mobControlVM.start() }
-        val next = ToggleButton("Next").apply { tooltip("bar\nlalala") }
-        val done = ToggleButton("Done").apply { tooltip("foo") }
+        val next = ToggleButton("Next").apply {
+            tooltip("bar\nlalala")
+            action { mobControlVM.next() }
+        }
+
+        val done = ToggleButton("Done").apply {
+            tooltip("foo")
+            action { mobControlVM.done() }
+        }
 
         val commit = ToggleButton("Commit")
 

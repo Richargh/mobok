@@ -24,10 +24,15 @@ class MobControlVM: ViewModel() {
     fun start() {
         mobMaster.start()
 
-
-
-
         startCountUp()
+    }
+
+    fun next() {
+       find(GitProgress::class).openModal()
+    }
+
+    fun done() {
+
     }
 
     private fun startCountUp() {

@@ -23,8 +23,8 @@ class MobMaster(val git: Git) {
             hasLocalMobbingBranch() && hasOriginMobbingBranch() -> {
                 println("Rejoining mob session")
                 if(!isMobbingBranchActive()){
-                    deleteLocalMobbingBranch()
-                    checkoutMobbingBranch()
+                    git.delteBranch(wipBranch)
+                    git.switchToBranch(wipBranch)
                 }
             }
             !hasLocalMobbingBranch() && !hasOriginMobbingBranch() -> {
