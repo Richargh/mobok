@@ -1,11 +1,11 @@
-package de.richargh.mobok
+package de.richargh.mobok.git
 
 import java.io.BufferedReader
 import java.io.File
 import java.io.IOException
 import java.io.InputStreamReader
 
-class GitAdapter(val baseFolder: File = File(".")) {
+class FileSystemGit(val baseFolder: File = File(".")) {
 
     fun git(vararg arguments: String): GitResult {
         val os = System.getProperty("os.name")

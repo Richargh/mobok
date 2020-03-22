@@ -1,4 +1,4 @@
-package de.richargh.mobok
+package de.richargh.mobok.git
 
 data class GitResult(val code: CliCode, val message: List<String>)
 
