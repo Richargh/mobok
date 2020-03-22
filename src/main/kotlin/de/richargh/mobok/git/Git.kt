@@ -6,4 +6,6 @@ interface Git {
 
     fun version(): GitVersion
 
+    fun remoteBranches(): List<String>
+
 }

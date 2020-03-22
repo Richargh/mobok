@@ -25,4 +25,15 @@ abstract class GitContract(val sut: Git) {
         // THEN
         assertThat(result).isGreaterThan(GitVersion.ofRaw("2."))
     }
+
+    @Test
+    fun `should have at least one remote branch`() {
+        // GIVEN
+
+        // WHEN
+        val result = sut.remoteBranches()
+
+        // THEN
+        assertThat(result).contains("origin/master")
+    }
 }

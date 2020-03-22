@@ -21,6 +21,11 @@ class FileSystemGit(val baseFolder: File = File(".")): Git {
         return GitVersion.ofCli(result)
     }
 
+    override fun remoteBranches(): List<String> {
+        val (code, result) = git("branch", "--remotes")
+        return result.map { it.trim() }
+    }
+
     private fun git(vararg arguments: String): GitResult {
         val os = System.getProperty("os.name")
         val processBuilder = when {
