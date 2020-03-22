@@ -6,13 +6,11 @@ import tornadofx.*
 
 class MemberView: View() {
 
-    val members = listOf(
-            Member("Robert"))
-            .asObservable()
+    private val memberVM: MemberVM by inject()
 
     override val root = vbox {
 
-        tableview(members) {
+        tableview(memberVM.members) {
             column("Name", Member::nameProperty)
 
             columnResizePolicy = TableView.CONSTRAINED_RESIZE_POLICY
@@ -26,7 +24,7 @@ class MemberView: View() {
             textfield()
             button("Add Member") {
                 action {
-
+                    memberVM.add(Member("Jim"))
                 }
             }
         }
