@@ -1,20 +1,18 @@
 package de.richargh.mobok
 
 import de.richargh.mobok.git.FakeGit
-import de.richargh.mobok.git.GitVersion
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
-class MobMasterTest {
+class GitServiceTest {
 
     @Disabled("FakeGit not yet ready")
     @Test
     fun `current version should be higher than 2`() {
         // GIVEN
         val git = FakeGit()
-        val sut = MobMaster(git)
+        val sut = GitService(git)
 
         // WHEN
         sut.start()

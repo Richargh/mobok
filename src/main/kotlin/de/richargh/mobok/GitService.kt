@@ -2,7 +2,7 @@ package de.richargh.mobok
 
 import de.richargh.mobok.git.Git
 
-class MobMaster(val git: Git) {
+class GitService(val git: Git) {
 
     private val wipBranch = "mob-session"
     private val baseBranch = "master"

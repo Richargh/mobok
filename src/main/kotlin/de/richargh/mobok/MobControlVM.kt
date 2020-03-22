@@ -1,7 +1,6 @@
 package de.richargh.mobok
 
 import de.richargh.mobok.git.FileSystemGit
-import de.richargh.mobok.git.Git
 import javafx.animation.KeyFrame
 import javafx.animation.Timeline
 import javafx.beans.property.SimpleIntegerProperty
@@ -13,7 +12,7 @@ import java.io.File
 
 class MobControlVM: ViewModel() {
 
-    private val mobMaster = MobMaster(FileSystemGit(File(".")))
+    private val mobMaster = GitService(FileSystemGit(File(".")))
 
     private var timeline: Timeline? = null
     private val maxSeconds = 15

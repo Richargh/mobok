@@ -1,7 +1,7 @@
 package de.richargh.mobok
 
+import javafx.beans.property.BooleanProperty
 import javafx.beans.property.SimpleBooleanProperty
-import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleStringProperty
 import tornadofx.*
 
@@ -10,16 +10,23 @@ class GitProgress: Fragment() {
     private val data = mutableListOf(Step("doFoo")).asObservable()
 
     override val root = hbox {
-        tableview(data) {
-            column("Done", Step::doneProperty)
-            column("Name", Step::nameProperty)
+        listview(data) {
+            cellFormat {
+                graphic = cache {
+                    hbox(spacing = 5) {
+                        checkbox(property = it.doneProperty)
+                        label(it.nameProperty) { isEditable = false }
+                    }
+                }
+            }
         }
     }
 }
 
+
 class Step(name: String) {
-    val doneProperty = SimpleBooleanProperty(false)
-    var done by doneProperty
+    val doneProperty: BooleanProperty = SimpleBooleanProperty(false)
+    val done by doneProperty
 
     val nameProperty = SimpleStringProperty(name)
     var name by nameProperty
