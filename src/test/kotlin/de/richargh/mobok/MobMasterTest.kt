@@ -4,10 +4,12 @@ import de.richargh.mobok.git.FakeGit
 import de.richargh.mobok.git.GitVersion
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class MobMasterTest {
 
+    @Disabled("FakeGit not yet ready")
     @Test
     fun `current version should be higher than 2`() {
         // GIVEN
