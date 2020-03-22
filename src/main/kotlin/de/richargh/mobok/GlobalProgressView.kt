@@ -21,10 +21,13 @@ class GlobalProgressView: View() {
 
     private val steps = mutableListOf<ProgressStep>().asObservable().apply {
         onChange { change ->
+
+            bcb.tooltip(text = null)
             val stepNames = change.list.map {
-                if(it.status is StepStatus.NOPE)
-                    "(X) ${it.name} (${it.status.message})"
-                else
+                if(it.status is StepStatus.NOPE) {
+                    bcb.tooltip("Step [${it.name}] failed because [${it.status.message}]")
+                    "(X) ${it.name} [${it.status.message}]"
+                } else
                     "${it.name}"
             }
             bcb.selectedCrumb = BreadCrumbBar.buildTreeModel(*stepNames.toTypedArray())
