@@ -42,6 +42,7 @@ class MobBranchService(val git: Git): Component() {
                 } else {
                     ProgressStep(name, StepStatus.OK)
                 }
+                steps.add(step)
                 globalProgress.pushLater(GlobalProgress(progress, steps))
             }
         }
@@ -61,45 +62,61 @@ class MobBranchService(val git: Git): Component() {
             if (git.status().uncommitedFiles.isNotEmpty())
                 fail(100, "Git Status", "Uncommited Files")
 
-            step(10, "Pull") {
-                git.fetch(prune = true)
-                git.pull(ffonly = true)
-            }
+            step(10, "Pull") { git.fetch(prune = true) }
+            step(20, "Pull") { git.pull(ffonly = true) }
 
             when {
                 hasLocalMobbingBranch() && hasOriginMobbingBranch()   -> {
-                    info(20, "Rejoining mob session")
+                    info(30, "Rejoining mob session")
                     if (!isMobbingBranchActive()) {
-                        step(30, "Delete local $wipBranch") { git.delteBranch(wipBranch) }
-                        step(40, "Switch to remote $wipBranch") { git.switchToBranch(wipBranch) }
+                        step(40, "Delete local $wipBranch") { git.delteBranch(wipBranch) }
+                        step(50, "Switch to $wipBranch") { git.switchToBranch(wipBranch) }
                     }
                 }
                 !hasLocalMobbingBranch() && !hasOriginMobbingBranch() -> {
-                    info(20, "Creating wip branch")
-                    git.switchToBranch(baseBranch)
-                    git.pull(rebase = true)
-                    git.createBranch(wipBranch)
-                    git.switchToBranch(wipBranch)
-                    git.pushBranch(wipBranch, remoteName)
+                    info(30, "Creating wip branch")
+                    step(40, "Switch to $baseBranch") { git.switchToBranch(baseBranch) }
+                    step(50, "Pull") { git.pull(rebase = true) }
+                    step(60, "Create $wipBranch") { git.createBranch(wipBranch) }
+                    step(70, "Switch to $wipBranch") { git.switchToBranch(wipBranch) }
+                    step(80, "Push $wipBranch") { git.pushBranch(wipBranch, remoteName) }
                 }
                 !hasLocalMobbingBranch() && hasOriginMobbingBranch()  -> {
-                    info(20, "Joining mob session")
-                    git.checkoutBranch(wipBranch)
-                    git.switchToBranch(wipBranch)
+                    info(30, "Joining mob session")
+                    step(40, "Checkout $wipBranch") { git.checkoutBranch(wipBranch) }
+                    step(50, "Switch to $wipBranch") { git.switchToBranch(wipBranch) }
                 }
                 else                                                  -> {
-                    info(20, "purging local branch and start new $wipBranch branch from $baseBranch")
-                    //                deleteLocalMobbingBranch()
+                    info(20, "Purging local branch and start new $wipBranch branch from $baseBranch")
+                    step(40, "Delete $wipBranch") { git.delteBranch(wipBranch) }
+
+                    step(50, "Checkout $baseBranch") { git.checkoutBranch(baseBranch) }
+                    step(60, "Pull") { git.pull(rebase = true) }
+
+                    step(70, "Create $wipBranch") { git.createBranch(wipBranch) }
+                    step(80, "Switch to $wipBranch") { git.switchToBranch(wipBranch) }
+                    step(80, "Push $wipBranch") { git.pushBranch(wipBranch, remoteName) }
                 }
             }
         }
     }
 
-    private fun checkoutMobbingBranch() = git.switchToBranch(wipBranch)
+    fun next() {
+        runAsyncSteps {
+            info(0, "Next")
+            if (!isMobbingBranchActive())
+                fail(100, "Git Status", "Not on mob branch")
 
-    private fun deleteLocalMobbingBranch() = git.delteBranch(wipBranch)
+            if(hasNothingToCommit())
+                info(100, "Nothing to commit")
+            else {
+            }
+        }
+    }
 
     private fun isMobbingBranchActive(): Boolean = git.localBranches().any { it.contains("* $wipBranch") }
+
+    private fun hasNothingToCommit(): Boolean = git.status().uncommitedFiles.isEmpty()
 
     private fun hasLocalMobbingBranch(): Boolean = git.localBranches().any { it.contains(wipBranch) }
 
