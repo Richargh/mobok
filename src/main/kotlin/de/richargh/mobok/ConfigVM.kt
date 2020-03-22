@@ -8,13 +8,13 @@ import java.nio.file.Path
 import java.nio.file.Paths
 
 class ConfigVM: ViewModel() {
-    override var configPath = Paths.get(".", "no.config")
+    override var configPath = Paths.get("..", "no.config")
 
     private val events: Events by inject()
 
     private val settingsFile = SimpleObjectProperty<Path>().apply {
         onChange(::changeConfigPath)
-        set(Paths.get(".", "mobok.config"))
+        set(Paths.get("..", "mobok.config"))
     }
 
     val settings = settingsFile.stringBinding { it?.normalize()?.toAbsolutePath()?.toString() ?: "" }
