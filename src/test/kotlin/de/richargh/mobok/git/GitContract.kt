@@ -31,7 +31,7 @@ abstract class GitContract(val sut: Git) {
         // GIVEN
 
         // WHEN
-        val result = sut.remoteBranches()
+        val result = sut.upstreamBranches()
 
         // THEN
         assertThat(result).contains("origin/master")

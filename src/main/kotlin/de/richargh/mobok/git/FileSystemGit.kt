@@ -6,7 +6,7 @@ import java.io.IOException
 import java.io.InputStreamReader
 import kotlin.streams.toList
 
-class FileSystemGit(val baseFolder: File = File(".")): Git {
+class FileSystemGit(private val baseFolder: File = File("."), private val upstream: String = "origin"): Git {
 
     override fun status(): GitStatus {
         // TODO what do I do about this (error) code?
@@ -21,12 +21,56 @@ class FileSystemGit(val baseFolder: File = File(".")): Git {
         return GitVersion.ofCli(result)
     }
 
-    override fun remoteBranches(): List<String> {
+    override fun localBranches(): List<String> {
+        val (code, result) = git("branch")
+        return result.map { it.trim() }
+    }
+
+    override fun upstreamBranches(): List<String> {
         val (code, result) = git("branch", "--remotes")
         return result.map { it.trim() }
     }
 
-    private fun git(vararg arguments: String): GitResult {
+    override fun checkoutBranch(name: String){
+        git("checkout", name)
+    }
+
+    override fun switchToBranch(name: String){
+        git("checkout", name)
+    }
+
+    override fun createBranch(name: String) {
+        git("checkout", name)
+    }
+
+    override fun delteBranch(name: String) {
+        git("branch", "-D", name)
+    }
+
+    override fun fetch(prune: Boolean) {
+        val args = sequence {
+            yield("fetch")
+            if(prune) yield("--prune")
+        }.toList()
+        val (code, result) = git(args)
+    }
+
+    override fun pull(rebase: Boolean, ffonly: Boolean) {
+        val args = sequence {
+            yield("pull")
+            if(rebase) yield("--rebase")
+            if(ffonly) yield("--ff-only")
+        }.toList()
+        val (code, result) = git(args)
+    }
+
+    override fun pushBranch(name: String, upstream: String) {
+        git("push", "-u", upstream, name)
+    }
+
+    private fun git(vararg arguments: String) = git(arguments.asList())
+
+    private fun git(arguments: List<String>): GitResult {
         val os = System.getProperty("os.name")
         val processBuilder = when {
             os.toLowerCase().contains("mac") ->
