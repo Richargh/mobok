@@ -1,6 +1,6 @@
 package de.richargh.mobok
 
-
+import de.richargh.mobok.git.FileSystemGit
 import javafx.animation.KeyFrame
 import javafx.animation.Timeline
 import javafx.beans.property.SimpleIntegerProperty
@@ -18,8 +18,9 @@ class MobControlVM: ViewModel() {
     private val memberSeconds = SimpleIntegerProperty(0)
     val memberProgress = memberSeconds.doubleBinding { (it?.toDouble() ?: 0.0) / maxSeconds }
 
-    fun start(){
-        GitAdapter(File(".")).git("status")
+    fun start() {
+        val status = FileSystemGit(File(".")).status()
+        println(status)
 
         if (timeline != null) {
             timeline?.stop()
@@ -40,5 +41,4 @@ class MobControlVM: ViewModel() {
             playFromStart()
         }
     }
-
 }
