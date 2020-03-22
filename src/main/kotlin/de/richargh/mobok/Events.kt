@@ -1,13 +1,16 @@
 package de.richargh.mobok
 
+import javafx.application.Platform
 import org.reactfx.EventSource
 import tornadofx.Component
 import tornadofx.ScopedInstance
 
 class Events: Component(), ScopedInstance {
     val personAdded = EventSource<PersonViewModel>()
+    val globalProgress = EventSource<GlobalProgress>()
 
-    init {
-        personAdded.subscribe { info("Notification: Person added") }
-    }
+}
+
+fun <T> EventSource<T>.pushLater(value: T){
+    Platform.runLater { push(value) }
 }

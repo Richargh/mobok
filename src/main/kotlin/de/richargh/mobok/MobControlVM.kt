@@ -12,7 +12,7 @@ import java.io.File
 
 class MobControlVM: ViewModel() {
 
-    private val mobMaster = GitService(FileSystemGit(File(".")))
+    private val mobMaster = MobBranchService(FileSystemGit(File(".")))
 
     private var timeline: Timeline? = null
     private val maxSeconds = 15
@@ -27,7 +27,6 @@ class MobControlVM: ViewModel() {
     }
 
     fun next() {
-       find(GitProgress::class).openModal()
     }
 
     fun done() {

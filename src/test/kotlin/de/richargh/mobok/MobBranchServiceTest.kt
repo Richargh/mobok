@@ -5,14 +5,14 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
-class GitServiceTest {
+class MobBranchServiceTest {
 
     @Disabled("FakeGit not yet ready")
     @Test
     fun `current version should be higher than 2`() {
         // GIVEN
         val git = FakeGit()
-        val sut = GitService(git)
+        val sut = MobBranchService(git)
 
         // WHEN
         sut.start()

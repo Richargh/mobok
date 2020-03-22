@@ -10,17 +10,17 @@ interface Git {
 
     fun upstreamBranches(): List<String>
 
-    fun checkoutBranch(name: String)
+    fun checkoutBranch(name: String): CliCode
 
-    fun switchToBranch(name: String)
+    fun switchToBranch(name: String): CliCode
 
-    fun createBranch(name: String)
+    fun createBranch(name: String): CliCode
 
-    fun delteBranch(name: String)
+    fun delteBranch(name: String): CliCode
 
-    fun fetch(prune: Boolean)
+    fun fetch(prune: Boolean): CliCode
 
-    fun pull(rebase: Boolean = true, ffonly: Boolean = false)
+    fun pull(rebase: Boolean = true, ffonly: Boolean = false): CliCode
 
-    fun pushBranch(name: String, upstream: String)
+    fun pushBranch(name: String, upstream: String): CliCode
 }

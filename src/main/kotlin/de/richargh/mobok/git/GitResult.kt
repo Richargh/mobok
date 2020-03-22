@@ -3,16 +3,19 @@ package de.richargh.mobok.git
 data class GitResult(val code: CliCode, val message: List<String>)
 
 sealed class CliCode {
-    object UNKNOWN_OS: CliCode()
-    object EXCEPTION: CliCode()
+    sealed class KO(open val message: String): CliCode() {
+        data class UNKNOWN_OS(val os: String): KO(os)
+        data class EXCEPTION(val stacktrace: String): KO(stacktrace)
+        data class OTHER(val rawValue: Int): CliCode()
+    }
+
 
     object OK: CliCode()
-    data class OTHER(val rawValue: Int): CliCode()
 
     companion object {
         fun ofExitCode(exitCode: Int) = when(exitCode){
             0 -> OK
-            else -> OTHER(exitCode)
+            else -> KO.OTHER(exitCode)
         }
     }
 }

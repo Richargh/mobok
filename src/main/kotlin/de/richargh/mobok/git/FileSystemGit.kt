@@ -31,42 +31,42 @@ class FileSystemGit(private val baseFolder: File = File("."), private val upstre
         return result.map { it.trim() }
     }
 
-    override fun checkoutBranch(name: String){
-        git("checkout", name)
+    override fun checkoutBranch(name: String): CliCode {
+        return git("checkout", name).code
     }
 
-    override fun switchToBranch(name: String){
+    override fun switchToBranch(name: String): CliCode{
         // alternative is git switch
-        git("checkout", name)
+        return git("checkout", name).code
     }
 
-    override fun createBranch(name: String) {
-        git("branch", name)
+    override fun createBranch(name: String): CliCode {
+        return git("branch", name).code
     }
 
-    override fun delteBranch(name: String) {
-        git("branch", "-D", name)
+    override fun delteBranch(name: String): CliCode {
+        return git("branch", "-D", name).code
     }
 
-    override fun fetch(prune: Boolean) {
+    override fun fetch(prune: Boolean): CliCode {
         val args = sequence {
             yield("fetch")
             if(prune) yield("--prune")
         }.toList()
-        val (code, result) = git(args)
+        return git(args).code
     }
 
-    override fun pull(rebase: Boolean, ffonly: Boolean) {
+    override fun pull(rebase: Boolean, ffonly: Boolean): CliCode {
         val args = sequence {
             yield("pull")
             if(rebase) yield("--rebase")
             if(ffonly) yield("--ff-only")
         }.toList()
-        val (code, result) = git(args)
+        return git(args).code
     }
 
-    override fun pushBranch(name: String, upstream: String) {
-        git("push", "-u", upstream, name)
+    override fun pushBranch(name: String, upstream: String): CliCode {
+        return git("push", "-u", upstream, name).code
     }
 
     private fun git(vararg arguments: String) = git(arguments.asList())
@@ -79,7 +79,7 @@ class FileSystemGit(private val baseFolder: File = File("."), private val upstre
             os.toLowerCase().contains("win") ->
                 ProcessBuilder("cmd.exe", "/c", "git ${arguments.joinToString(" ")}")
             else                             ->
-                return GitResult(CliCode.UNKNOWN_OS, emptyList())
+                return GitResult(CliCode.KO.UNKNOWN_OS(os), emptyList())
         }
         processBuilder.directory(baseFolder)
 
@@ -93,10 +93,10 @@ class FileSystemGit(private val baseFolder: File = File("."), private val upstre
             GitResult(CliCode.ofExitCode(exitCode), lines)
         } catch (e: IOException) {
             e.printStackTrace()
-            GitResult(CliCode.EXCEPTION, listOf(e.toString()))
+            GitResult(CliCode.KO.EXCEPTION(e.toString()), emptyList())
         } catch (e: InterruptedException) {
             e.printStackTrace()
-            GitResult(CliCode.EXCEPTION, listOf(e.toString()))
+            GitResult(CliCode.KO.EXCEPTION(e.toString()), emptyList())
         }
     }
 }

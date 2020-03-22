@@ -16,31 +16,31 @@ class FakeGit(
 
     override fun upstreamBranches(): List<String> = upstreamBranches
 
-    override fun checkoutBranch(name: String) {
+    override fun checkoutBranch(name: String): CliCode {
         TODO("Not yet implemented")
     }
 
-    override fun switchToBranch(name: String) {
+    override fun switchToBranch(name: String): CliCode {
         TODO("Not yet implemented")
     }
 
-    override fun createBranch(name: String) {
+    override fun createBranch(name: String): CliCode {
         TODO("Not yet implemented")
     }
 
-    override fun delteBranch(name: String) {
+    override fun delteBranch(name: String): CliCode {
         TODO("Not yet implemented")
     }
 
-    override fun fetch(prune: Boolean) {
+    override fun fetch(prune: Boolean): CliCode {
         TODO("Not yet implemented")
     }
 
-    override fun pull(rebase: Boolean, ffonly: Boolean) {
+    override fun pull(rebase: Boolean, ffonly: Boolean): CliCode {
         TODO("Not yet implemented")
     }
 
-    override fun pushBranch(name: String, upstream: String) {
+    override fun pushBranch(name: String, upstream: String): CliCode {
         TODO("Not yet implemented")
     }
 }
