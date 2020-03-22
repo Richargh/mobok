@@ -6,7 +6,7 @@ import de.richargh.mobok.subListOrEmpty
 data class GitStatus private constructor(val branch: String, val uncommitedFiles: List<String>){
     companion object {
         fun ofCli(cliResult: List<String>) = GitStatus(
-                cliResult[0].branch(),
+                if(cliResult.size > 0)cliResult[0].branch() else "Unknown",
                 cliResult.subListOrEmpty(1).map { it.file() })
         fun ofRaw(branch: String, uncommitedFiles: List<String>) = GitStatus(branch, uncommitedFiles)
 

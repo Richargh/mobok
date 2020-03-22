@@ -91,4 +91,17 @@ class GitStatusTest {
         // THEN
         assertThat(result.uncommitedFiles).containsExactly("mobok.config")
     }
+
+    @Test
+    fun `should find one deleted file when one is supplied`() {
+        // GIVEN
+
+        // WHEN
+        val result = GitStatus.ofCli(
+                listOf("## master...origin/master [ahead 3]",
+                       "D  mobok.config"))
+
+        // THEN
+        assertThat(result.uncommitedFiles).containsExactly("mobok.config")
+    }
 }
