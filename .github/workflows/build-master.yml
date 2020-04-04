@@ -29,10 +29,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Build >8 with gradle
-        run: ./gradlew build
+        run: ./gradlew build --no-daemon
         if: matrix.java-version != '8'
       - name: Build 8 with gradle
-        run: ./gradlew build --build-file build8.gradle.kts
+        run: ./gradlew build --no-daemon --build-file build8.gradle.kts
         if: matrix.java-version == '8'
       - uses: actions/upload-artifact@v1
         with:
