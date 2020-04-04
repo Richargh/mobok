@@ -7,7 +7,7 @@ jobs:
   build:
     strategy:
       matrix:
-        java-version: [ '11' ]
+        java-version: [ '8' ]
         os: [ 'windows-latest', 'ubuntu-latest', 'macos-latest' ]
     runs-on: ${{ matrix.os }}
     steps:
@@ -19,4 +19,4 @@ jobs:
           java-version: ${{ matrix.java-version }}
           architecture: x64
       - name: Build with gradle
-        run: ./gradlew build
+        run: ./gradlew build --build-file build8.gradle.kts

@@ -21,5 +21,7 @@ Inspired by the CLI Tool link:https://github.com/remotemobprogramming/mob[Mob]
 
 == Usage
 
-* Build `./gradlew build`
-
+* Build Java11+ `./gradlew build`
+* Run Java11+ `./gradlew run`
+* Build Java8 `./gradlew build --build-file build8.gradle.kts`
+* Run Java8 `./gradlew run --build-file build8.gradle.kts`
