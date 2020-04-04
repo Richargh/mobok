@@ -35,5 +35,5 @@ jobs:
       - name: Build base image
         env:
           VERSION: ${{ steps.get_version.outputs.VERSION }}
-        run: echo VERSION
         if: "$VERSION" != ""
+        run: echo $VERSION
