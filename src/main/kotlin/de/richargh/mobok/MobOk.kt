@@ -5,9 +5,7 @@ import javafx.stage.Stage
 import kotlinx.coroutines.runBlocking
 import tornadofx.App
 
-class MobOk: App() {
-    override val primaryView = MainView::class
-
+class MobOk: App(MainView::class, Styles::class) {
     override fun start(stage: Stage) = runBlocking {
         super.start(stage)
     }

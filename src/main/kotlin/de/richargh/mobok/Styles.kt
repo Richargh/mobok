@@ -1,80 +1,41 @@
 package de.richargh.mobok
 
-import tornadofx.Stylesheet
-
-import javafx.geometry.Pos
+import javafx.scene.layout.BorderStrokeStyle
+import javafx.scene.shape.StrokeLineCap
+import javafx.scene.shape.StrokeLineJoin
+import javafx.scene.shape.StrokeType
 import tornadofx.*
 
 class Styles : Stylesheet() {
     companion object {
-        val strikethrough by cssclass()
-        val itemRoot by cssclass()
-        val closeIcon by cssclass()
-        val contentLabel by cssid()
-        val title by cssid()
-        val addItemRoot by cssclass()
-        val mainCheckBox by cssclass()
-        val header by cssclass()
-        val footer by cssclass()
+        // Define our styles
+        val wrapper by cssclass()
+        val bob by cssclass()
+        val alice by cssclass()
+
+        // Define our colors
+        val dangerColor = c("#a94442")
+        val hoverColor = c("#d49942")
     }
 
     init {
-        strikethrough {
-            text {
-                strikethrough = true
-            }
-        }
-
-        closeIcon {
-            fill = c("#cc9a9a")
-
-            and(hover) {
-                fill = c("#af5b5e")
-            }
-        }
-
-        itemRoot {
-            padding = box(8.px)
-            button {
-                backgroundColor += c("transparent")
-                padding = box(-2.px)
-            }
-            alignment = Pos.CENTER_LEFT
-        }
-
-        contentLabel {
-            fontSize = 1.2.em
-        }
-
-        title {
-            fontSize = 12.em
-            textFill = c(175, 47, 47, 0.5)
-        }
-
-        addItemRoot {
-            padding = box(1.em)
-            textField {
-                prefWidth = 200.px
-            }
-        }
-
-        mainCheckBox {
-            padding = box(0.1.em, 1.em, 0.1.em, 0.1.em)
-        }
-
-        header {
-            alignment = Pos.CENTER
-            star {
-                alignment = Pos.CENTER_LEFT
-            }
-        }
-
-        footer {
+        wrapper {
             padding = box(10.px)
-            alignment = Pos.CENTER
-            spacing = 20.px
-            star {
-                spacing = 10.px
+            spacing = 10.px
+        }
+
+        label {
+            padding = box(5.px, 10.px)
+            maxWidth = infinity
+
+            and(bob, alice) {
+                borderColor += box(dangerColor)
+                borderStyle += BorderStrokeStyle(StrokeType.INSIDE, StrokeLineJoin.MITER, StrokeLineCap.BUTT, 10.0, 0.0, listOf(25.0, 5.0))
+                borderWidth += box(5.px)
+
+                and(hover) {
+                    backgroundColor += hoverColor
+                }
             }
         }
     }
