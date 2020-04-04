@@ -42,3 +42,4 @@ jobs:
         run: echo $FIRST_NAME
         env:
           FIRST_NAME: Mona
+          VERSION: ${{ steps.get_version.outputs.VERSION }}
