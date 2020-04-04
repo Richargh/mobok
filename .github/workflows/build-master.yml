@@ -33,7 +33,6 @@ jobs:
           name: mobok${{ matrix.java-version }}
           path: build/distributions/
       - name: Build base image
+        run: echo $FIRST_NAME
         env:
-          VERSION: ${{ steps.get_version.outputs.VERSION }}
-        if: "$VERSION" != ""
-        run: echo $VERSION
+          FIRST_NAME: Mona
