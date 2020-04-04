@@ -25,3 +25,11 @@ Inspired by the CLI Tool link:https://github.com/remotemobprogramming/mob[Mob]
 * Run Java11+ `./gradlew run`
 * Build Java8 `./gradlew build --build-file build8.gradle.kts`
 * Run Java8 `./gradlew run --build-file build8.gradle.kts`
+
+== Release
+
+Create an release by tagging in git: `git tag -a v1.1.4 -m "my version 1.1.4"`
+
+== Actions
+
+List of all Github Actions link:https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables[Environment Variables].
