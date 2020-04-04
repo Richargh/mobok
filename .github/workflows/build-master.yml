@@ -12,6 +12,9 @@ jobs:
         os: [ 'ubuntu-latest' ]
     runs-on: ${{ matrix.os }}
     steps:
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - name: Checkout Source Code
         uses: actions/checkout@v1
       - name: Setup Java ${{ matrix.java-version }}
@@ -29,3 +32,8 @@ jobs:
         with:
           name: mobok${{ matrix.java-version }}
           path: build/distributions/
+      - name: Build base image
+          run: |
+            echo VERSION
+          env:
+            SOURCE_TAG: ${{ steps.get_version.outputs.VERSION }}
