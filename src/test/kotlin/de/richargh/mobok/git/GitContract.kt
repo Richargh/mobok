@@ -1,8 +1,10 @@
 package de.richargh.mobok.git
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
+@Disabled("Only work locally")
 abstract class GitContract(val sut: Git) {
     @Test
     fun `current branch should be on master`() {
