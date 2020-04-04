@@ -30,6 +30,7 @@ Inspired by the CLI Tool link:https://github.com/remotemobprogramming/mob[Mob]
 
 Create an release by tagging in git: `git tag v0.0.2` then `git push origin --tags`
 
-== Actions
+== Github Actions
 
-List of all Github Actions link:https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables[Environment Variables].
+* link:https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables[Environment Variables]
+* link:https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions[Context and expression syntax for GitHub Actions]
