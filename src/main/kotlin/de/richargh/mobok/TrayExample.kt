@@ -88,7 +88,7 @@ class TrayExample: App() {
             // set up a system tray icon.
             val tray = SystemTray.getSystemTray()
             val imageInputStream: InputStream =
-                    TaskbarExample::class.java.getResourceAsStream("woman-gesturing-OK[iconfinder].png")
+                    TrayExample::class.java.getResourceAsStream("woman-gesturing-OK[iconfinder].png")
             val image: Image = ImageIO.read(imageInputStream)
             val trayIcon = TrayIcon(image)
 
