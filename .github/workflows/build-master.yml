@@ -39,7 +39,7 @@ jobs:
           name: mobok${{ matrix.java-version }}
           path: build/distributions/
       - name: Build base image
-        run: echo $FIRST_NAME
+        run: echo $VERSION
         env:
           FIRST_NAME: Mona
           VERSION: ${{ steps.get_version.outputs.VERSION }}
