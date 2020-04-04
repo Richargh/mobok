@@ -20,3 +20,7 @@ jobs:
           architecture: x64
       - name: Build with gradle
         run: ./gradlew build --build-file build8.gradle.kts
+      - uses: actions/upload-artifact@v1
+        with:
+          name: mobok8
+          path: build/distributions/

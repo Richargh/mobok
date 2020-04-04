@@ -20,3 +20,7 @@ jobs:
           architecture: x64
       - name: Build with gradle
         run: ./gradlew build
+      - uses: actions/upload-artifact@v1
+        with:
+          name: mobok
+          path: build/distributions/
