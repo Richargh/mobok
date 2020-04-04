@@ -28,7 +28,7 @@ Inspired by the CLI Tool link:https://github.com/remotemobprogramming/mob[Mob]
 
 == Release
 
-Create an release by tagging in git: `git tag -a v1.1.4 -m "my version 1.1.4"`
+Create an release by tagging in git: `git tag v0.0.2` then `git push origin --tags`
 
 == Actions
 
